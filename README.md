@@ -62,13 +62,13 @@ git clone https://github.com/fizlip/html2latex.git
 ```
 
 ## Usage
-Compile and run the code
+### Compile and run the code 
 
-Run the code:
 ```
 g++ main.cpp -o html2latex_example-lcurl
 ./html2latex_example
 ```
+
 The program will prompt you for a filename to store the text data in.
 This should be a .tex file if you want to compile it with a LaTeX compiler.
 After this the program will ask for a URL that contains the HTML you want to
