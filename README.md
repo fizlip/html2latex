@@ -49,7 +49,7 @@ sudo aptitude install libcurl4-openssl-dev
 ```
 #### Arch
 ```
-sudo pacman -Y libcurl-openssl-1.0
+yay -Y libcurl-openssl-1.0
 ```
 <br />
 There is some problem with the GPG key and it has to imported manually from https://daniel.haxx.se/mykey.asc as
