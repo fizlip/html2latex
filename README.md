@@ -65,7 +65,7 @@ git clone https://github.com/fizlip/html2latex.git
 ### Compile and run the code 
 
 ```
-g++ main.cpp -o html2latex_example-lcurl
+g++ main.cpp -o html2latex_example -lcurl
 ./html2latex_example
 ```
 
