@@ -1,0 +1,876 @@
+
+\documentclass{article}\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
+\thispagestyle{empty}
+\titleformat{\section}
+{\Large\bfseries\color{black}}
+{}
+{0em}
+{}[\color{black}\titlerule]
+\titleformat{\subsection}
+{\normalsize\bfseries}
+{}
+{0em}
+{}
+\titleformat{\subsubsection}[runin]
+{\small\bfseries}
+{}
+{0em}
+{}[---]
+\titlespacing{\subsubsection}
+{0em}{0.25em}{0em}
+\title{Resume}
+\author{Filip Zlatoidsky}
+\begin{document}
+
+
+
+
+
+
+
+	
+	
+	
+	
+	\section{C (programming language)}
+	
+		From Wikipedia, the free encyclopedia
+		
+		
+		
+		
+		Jump to navigation
+		Jump to search
+		"C programming language" redirects here. For the book, see The C Programming Language.
+\itemNot to be confused with C++.
+
+\\
+
+General-purpose programming language
+
+\textbf{C} (/ˈsiː/, as in the letter \emph{c}) is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions. It has found lasting use in applications previously coded in assembly language. Such applications include operating systems and various application software for computer architectures that range from supercomputers to PLCs and embedded systems.
+\\
+A successor to the programming language \emph{B}, C was originally developed at Bell Labs by Dennis Ritchie between 1972 and 1973 to construct utilities running on Unix. It was applied to re-implementing the kernel of the Unix operating system. During the 1980s, C gradually gained popularity. It has become one of the most widely used programming languages, with C compilers from various vendors available for the majority of existing computer architectures and operating systems. C has been standardized by ANSI since 1989 (ANSI C) and by the International Organization for Standardization (ISO).
+\\
+C is an imperative procedural language. It was designed to be compiled to provide low-level access to memory and language constructs that map efficiently to machine instructions, all with minimal runtime support. Despite its low-level capabilities, the language was designed to encourage cross-platform programming. A standards-compliant C program written with portability in mind can be compiled for a wide variety of computer platforms and operating systems with few changes to its source code.
+\\
+As of January&\#160;2021, C was ranked first in the TIOBE index, a measure of the popularity of programming languages, moving up from the no.&\#160;2 spot the previous year.
+\\
+
+\section{Contents}
+\begin{itemize}
+\item1 Overview
+\begin{itemize}
+\item1.1 Relations to other languages
+\end{itemize}
+
+\item2 History
+\begin{itemize}
+\item2.1 Early developments
+\item2.2 K&amp;R C
+\item2.3 ANSI C and ISO C
+\item2.4 C99
+\item2.5 C11
+\item2.6 C17
+\item2.7 C2x
+\item2.8 Embedded C
+\end{itemize}
+
+\item3 Syntax
+\begin{itemize}
+\item3.1 Character set
+\item3.2 Reserved words
+\item3.3 Operators
+\end{itemize}
+
+\item4 "Hello, world" example
+\item5 Data types
+\begin{itemize}
+\item5.1 Pointers
+\item5.2 Arrays
+\item5.3 Array–pointer interchangeability
+\end{itemize}
+
+\item6 Memory management
+\item7 Libraries
+\begin{itemize}
+\item7.1 File handling and streams
+\end{itemize}
+
+\item8 Language tools
+\item9 Uses
+\item10 Related languages
+\item11 See also
+\item12 Notes
+\item13 References
+\item14 Sources
+\item15 Further reading
+\item16 External links
+\end{itemize}
+
+
+\section{Overview[edit]}
+  Dennis Ritchie (right), the inventor of the C programming language, with Ken Thompson
+Like most procedural languages in the ALGOL tradition, C has facilities for structured programming and allows lexical variable scope and recursion. Its static type system prevents unintended operations. In C, all executable code is contained within subroutines (also called "functions", though not strictly in the sense of functional programming). Function parameters are always passed by value (except arrays). Pass-by-reference is simulated in C by explicitly passing pointer values. C program source text is free-format, using the semicolon as a statement terminator and curly braces for grouping blocks of statements.
+\\
+The C language also exhibits the following characteristics:
+\\
+
+\begin{itemize}\itemThe language has a small, fixed number of keywords, including a full set of control flow primitives: <code>if/else</code>, <code>for</code>, <code>do/while</code>, <code>while</code>, and <code>switch</code>. User-defined names are not distinguished from keywords by any kind of sigil.
+\itemIt has a large number of arithmetic, bitwise, and logic operators: <code>+</code>,<code>+=</code>,<code>++</code>,<code>&amp;</code>,<code>||</code>, etc.
+\itemMore than one assignment may be performed in a single statement.
+\itemFunctions:
+\begin{itemize}\itemFunction return values can be ignored, when not needed.
+\itemFunction and data pointers permit \emph{ad hoc} run-time polymorphism.
+\itemFunctions may not be defined within the lexical scope of other functions.\end{itemize}
+\itemData typing is static, but weakly enforced; all data has a type, but implicit conversions are possible.
+\itemDeclaration syntax mimics usage context. C has no "define" keyword; instead, a statement beginning with the name of a type is taken as a declaration. There is no "function" keyword; instead, a function is indicated by the presence of a parenthesized argument list.
+\itemUser-defined (typedef) and compound types are possible.
+\begin{itemize}\itemHeterogeneous aggregate data types (<code>struct</code>) allow related data elements to be accessed and assigned as a unit.
+\itemUnion is a structure with overlapping members; only the last member stored is valid.
+\itemArray indexing is a secondary notation, defined in terms of pointer arithmetic. Unlike structs, arrays are not first-class objects: they cannot be assigned or compared using single built-in operators. There is no "array" keyword in use or definition; instead, square brackets indicate arrays syntactically, for example <code>month[11]</code>.
+\itemEnumerated types are possible with the <code>enum</code> keyword. They are freely interconvertible with integers.
+\itemStrings are not a distinct data type, but are conventionally implemented as null-terminated character arrays.\end{itemize}
+\itemLow-level access to computer memory is possible by converting machine addresses to typed pointers.
+\itemProcedures (subroutines not returning values) are a special case of function, with an untyped return type <code>void</code>.
+\itemA preprocessor performs macro definition, source code file inclusion, and conditional compilation.
+\itemThere is a basic form of modularity: files can be compiled separately and linked together, with control over which functions and data objects are visible to other files via <code>static</code> and <code>extern</code> attributes.
+\itemComplex functionality such as I/O, string manipulation, and mathematical functions are consistently delegated to library routines.\end{itemize}
+While C does not include certain features found in other languages (such as object orientation and garbage collection), these can be implemented or emulated, often through the use of external libraries (e.g., the GLib Object System or the Boehm garbage collector).
+\\
+
+\section{Relations to other languages[edit]}
+Many later languages have borrowed directly or indirectly from C, including C++, C\#, Unix's C shell, D, Go, Java, JavaScript (including transpilers), Julia, Limbo, LPC, Objective-C, Perl, PHP, Python, Ruby, Rust, Swift, Verilog and SystemVerilog (hardware description languages).  These languages have drawn many of their control structures and other basic features from C. Most of them (Python being a dramatic exception) also express highly similar syntax to C, and they tend to combine the recognizable expression and statement syntax of C with underlying type systems, data models, and semantics that can be radically different.
+\\
+
+\section{History[edit]}
+\section{Early developments[edit]}
+
+The origin of C is closely tied to the development of the Unix operating system, originally implemented in assembly language on a PDP-7 by Dennis Ritchie and Ken Thompson, incorporating several ideas from colleagues.  Eventually, they decided to port the operating system to a PDP-11. The original PDP-11 version of Unix was also developed in assembly language.
+\\
+Thompson desired a programming language to make utilities for the new platform. At first, he tried to make a Fortran compiler, but soon gave up the idea. Instead, he created a cut-down version of the recently developed BCPL systems programming language. The official description of BCPL was not available at the time, and Thompson modified the syntax to be less wordy, producing the similar but somewhat simpler B. However, few utilities were ultimately written in B because it was too slow, and B could not take advantage of PDP-11 features such as byte addressability.
+\\
+In 1972, Ritchie started to improve B, which resulted in creating a new language C. The C compiler and some utilities made with it were included in Version 2 Unix.
+\\
+At Version 4 Unix, released in November 1973, the Unix kernel was extensively re-implemented in C. By this time, the C language had acquired some powerful features such as <code>struct</code> types.
+\\
+Preprocessor was introduced around 1973 at the urging of Alan Snyder and also in recognition of the usefulness of the file-inclusion mechanisms available in BCPL and PL/I. Its original version provided only included files and simple string replacements: <code>\#include</code> and <code>\#define</code> of parameterless macros. Soon after that, it was extended, mostly by Mike Lesk and then by John Reiser, to incorporate macros with arguments and conditional compilation.
+\\
+Unix was one of the first operating system kernels implemented in a language other than assembly. Earlier instances include the Multics system (which was written in PL/I) and Master Control Program (MCP) for the Burroughs B5000 (which was written in ALGOL) in 1961. In around  1977, Ritchie and Stephen C. Johnson made further changes to the language to facilitate portability of the Unix operating system.  Johnson's Portable C Compiler served as the basis for several implementations of C on new platforms.
+\\
+
+\section{K&amp;R C[edit]}
+  The cover of the book \emph{The C Programming Language}, first edition, by Brian Kernighan and Dennis Ritchie
+In 1978, Brian Kernighan and Dennis Ritchie published the first edition of \emph{The C Programming Language}. This book, known to C programmers as \emph{K&amp;R}, served for many years as an informal specification of the language. The version of C that it describes is commonly referred to as "\textbf{K&amp;R C}". As this was released in 1978, it is also referred to as \emph{C78}. The second edition of the book covers the later ANSI C standard, described below.
+\\
+\emph{K&amp;R} introduced several language features:
+\\
+
+\begin{itemize}\itemStandard I/O library
+\item<code>long int</code> data type
+\item<code>unsigned int</code> data type
+\itemCompound assignment operators of the form <code>=\emph{op}</code> (such as <code>=-</code>) were changed to the form <code>\emph{op}=</code> (that is, <code>-=</code>) to remove the semantic ambiguity created by constructs such as <code>i=-10</code>, which had been interpreted as <code>i&\#160;=-&\#160;10</code> (decrement <code>i</code> by 10) instead of the possibly intended <code>i&\#160;=&\#160;-10</code> (let <code>i</code> be −10).\end{itemize}
+Even after the publication of the 1989 ANSI standard, for many years K&amp;R C was still considered the "lowest common denominator" to which C programmers restricted themselves when maximum portability was desired, since many older compilers were still in use, and because carefully written K&amp;R C code can be legal Standard C as well.
+\\
+In early versions of C, only functions that return types other than <code>int</code> must be declared if used before the function definition; functions used without prior declaration were presumed to return type <code>int</code>.
+\\
+For example:
+\\
+
+long some\_function();
+/* int */ other\_function();
+
+/* int */ calling\_function()
+{
+    long test1;
+    register /* int */ test2;
+
+    test1 = some\_function();
+    if (test1 &gt; 0)
+          test2 = 0;
+    else
+          test2 = other\_function();
+    return test2;
+}
+
+The <code>int</code> type specifiers which are commented out could be omitted in K&amp;R C, but are required in later standards.
+\\
+Since K&amp;R function declarations did not include any information about function arguments, function parameter type checks were not performed, although some compilers would issue a warning message if a local function was called with the wrong number of arguments, or if multiple calls to an external function used different numbers or types of arguments.  Separate tools such as Unix's lint utility were developed that (among other things) could check for consistency of function use across multiple source files.
+\\
+In the years following the publication of K&amp;R C, several features were added to the language, supported by compilers from AT&amp;T (in particular PCC) and some other vendors. These included:
+\\
+
+\begin{itemize}\item<code>void</code> functions (i.e., functions with no return value)
+\itemfunctions returning <code>struct</code> or <code>union</code> types (rather than pointers)
+\itemassignment for <code>struct</code> data types
+\itemenumerated types\end{itemize}
+The large number of extensions and lack of agreement on a standard library, together with the language popularity and the fact that not even the Unix compilers precisely implemented the K&amp;R specification, led to the necessity of standardization.
+\\
+
+\section{ANSI C and ISO C[edit]}
+\itemMain article: ANSI C
+During the late 1970s and 1980s, versions of C were implemented for a wide variety of mainframe computers, minicomputers, and microcomputers, including the IBM PC, as its popularity began to increase significantly.
+\\
+In 1983, the American National Standards Institute (ANSI) formed a committee, X3J11, to establish a standard specification of C. X3J11 based the C standard on the Unix implementation; however, the non-portable portion of the Unix C library was handed off to the IEEE working group 1003 to become the basis for the 1988 POSIX standard. In 1989, the C standard was ratified as ANSI X3.159-1989 "Programming Language C".  This version of the language is often referred to as ANSI C, Standard C, or sometimes C89.
+\\
+In 1990, the ANSI C standard (with formatting changes) was adopted by the International Organization for Standardization (ISO) as ISO/IEC 9899:1990, which is sometimes called C90. Therefore, the terms "C89" and "C90" refer to the same programming language.
+\\
+ANSI, like other national standards bodies, no longer develops the C standard independently, but defers to the international C standard, maintained by the working group ISO/IEC JTC1/SC22/WG14.  National adoption of an update to the international standard typically occurs within a year of ISO publication.
+\\
+One of the aims of the C standardization process was to produce a superset of K&amp;R C, incorporating many of the subsequently introduced unofficial features. The standards committee also included several additional features such as function prototypes (borrowed from C++), <code>void</code> pointers, support for international character sets and locales, and preprocessor enhancements. Although the syntax for parameter declarations was augmented to include the style used in C++, the K&amp;R interface continued to be permitted, for compatibility with existing source code.
+\\
+C89 is supported by current C compilers, and most modern C code is based on it. Any program written only in Standard C and without any hardware-dependent assumptions will run correctly on any platform with a conforming C implementation, within its resource limits.  Without such precautions, programs may compile only on a certain platform or with a particular compiler, due, for example, to the use of non-standard libraries, such as GUI libraries, or to a reliance on compiler- or platform-specific attributes such as the exact size of data types and byte endianness.
+\\
+In cases where code must be compilable by either standard-conforming or K&amp;R C-based compilers, the <code>\_\_STDC\_\_</code> macro can be used to split the code into Standard and K&amp;R sections to prevent the use on a K&amp;R C-based compiler of features available only in Standard C.
+\\
+After the ANSI/ISO standardization process, the C language specification remained relatively static for several years. In 1995, Normative Amendment 1 to the 1990 C standard (ISO/IEC 9899/AMD1:1995, known informally as C95) was published, to correct some details and to add more extensive support for international character sets.
+\\
+
+\section{C99[edit]}
+\itemMain article: C99
+The C standard was further revised in the late 1990s, leading to the publication of ISO/IEC 9899:1999 in 1999, which is commonly referred to as "C99". It has since been amended three times by Technical Corrigenda.
+\\
+C99 introduced several new features, including inline functions, several new data types (including <code>long long int</code> and a <code>complex</code> type to represent complex numbers), variable-length arrays and flexible array members, improved support for IEEE 754 floating point, support for variadic macros (macros of variable arity), and support for one-line comments beginning with <code>//</code>, as in BCPL or C++. Many of these had already been implemented as extensions in several C compilers.
+\\
+C99 is for the most part backward compatible with C90, but is stricter in some ways; in particular, a declaration that lacks a type specifier no longer has <code>int</code> implicitly assumed. A standard macro <code>\_\_STDC\_VERSION\_\_</code> is defined with value <code>199901L</code> to indicate that C99 support is available. GCC, Solaris Studio, and other C compilers now support many or all of the new features of C99. The C compiler in Microsoft Visual C++, however, implements the C89 standard and those parts of C99 that are required for compatibility with C++11.
+\\
+In addition, support for Unicode identifiers (variable / function names) in the form of escaped characters (e.g. <code class="mw-highlight mw-highlight-lang-text mw-content-ltr" id="" style="" dir="ltr">\textbackslash 0001f431</code>) is now required. Support for raw Unicode names like <code class="mw-highlight mw-highlight-lang-text mw-content-ltr" id="" style="" dir="ltr">🐱</code> is optional.
+\\
+
+\section{C11[edit]}
+\itemMain article: C11 (C standard revision)
+In 2007, work began on another revision of the C standard, informally called "C1X" until its official publication on 2011-12-08. The C standards committee adopted guidelines to limit the adoption of new features that had not been tested by existing implementations.
+\\
+The C11 standard adds numerous new features to C and the library, including type generic macros, anonymous structures, improved Unicode support, atomic operations, multi-threading, and bounds-checked functions.  It also makes some portions of the existing C99 library optional, and improves compatibility with C++. The standard macro <code>\_\_STDC\_VERSION\_\_</code> is defined as <code>201112L</code> to indicate that C11 support is available.
+\\
+
+\section{C17[edit]}
+\itemMain article: C17 (C standard revision)
+Published in June 2018, C17 is the current standard for the C programming language. It introduces no new language features, only technical corrections, and clarifications to defects in C11. The standard macro <code>\_\_STDC\_VERSION\_\_</code> is defined as <code>201710L</code>.
+\\
+
+\section{C2x[edit]}
+\itemMain article: C2x
+C2x is an informal name for the next (after C17) major C language standard revision. It is not expected to be voted on until December 2021.
+\\
+
+\section{Embedded C[edit]}
+\itemMain article: Embedded C
+Historically, embedded C programming requires nonstandard extensions to the C language in order to support exotic features such as fixed-point arithmetic, multiple distinct memory banks, and basic I/O operations.
+\\
+In 2008, the C Standards Committee published a technical report extending the C language to address these issues by providing a common standard for all implementations to adhere to. It includes a number of features not available in normal C, such as fixed-point arithmetic, named address spaces, and basic I/O hardware addressing.
+\\
+
+\section{Syntax[edit]}
+\itemMain article: C syntax
+C has a formal grammar specified by the C standard. Line endings are generally not significant in C; however, line boundaries do have significance during the preprocessing phase. Comments may appear either between the delimiters <code>/*</code> and <code>*/</code>, or (since C99)  following <code>//</code> until the end of the line. Comments delimited by <code>/*</code> and <code>*/</code> do not nest, and these sequences of characters are not interpreted as comment delimiters if they appear inside string or character literals.
+\\
+C source files contain declarations and function definitions. Function definitions, in turn, contain declarations and statements. Declarations either define new types using keywords such as <code>struct</code>, <code>union</code>, and <code>enum</code>, or assign types to and perhaps reserve storage for new variables, usually by writing the type followed by the variable name. Keywords such as <code>char</code> and <code>int</code> specify built-in types. Sections of code are enclosed in braces (<code>{</code> and <code>}</code>, sometimes called "curly brackets") to limit the scope of declarations and to act as a single statement for control structures.
+\\
+As an imperative language, C uses \emph{statements} to specify actions. The most common statement is an \emph{expression statement}, consisting of an expression to be evaluated, followed by a semicolon; as a side effect of the evaluation, functions may be called and variables may be assigned new values. To modify the normal sequential execution of statements, C provides several control-flow statements identified by reserved keywords. Structured programming is supported by <code>if</code>(-<code>else</code>) conditional execution and by <code>do</code>-<code>while</code>, <code>while</code>, and <code>for</code> iterative execution (looping). The <code>for</code> statement has separate initialization, testing, and reinitialization expressions, any or all of which can be omitted. <code>break</code> and <code>continue</code> can be used to leave the innermost enclosing loop statement or skip to its reinitialization. There is also a non-structured <code>goto</code> statement which branches directly to the designated label within the function. <code>switch</code> selects a <code>case</code> to be executed based on the value of an integer expression.
+\\
+Expressions can use a variety of built-in operators and may contain function calls. The order in which arguments to functions and operands to most operators are evaluated is unspecified. The evaluations may even be interleaved. However, all side effects (including storage to variables) will occur before the next "sequence point"; sequence points include the end of each expression statement, and the entry to and return from each function call.  Sequence points also occur during evaluation of expressions containing certain operators (<code>&amp;&amp;</code>, <code>||</code>, <code>?:</code> and the comma operator). This permits a high degree of object code optimization by the compiler, but requires C programmers to take more care to obtain reliable results than is needed for other programming languages.
+\\
+Kernighan and Ritchie say in the Introduction of \emph{The C Programming Language}: "C, like any other language, has its blemishes. Some of the operators have the wrong precedence; some parts of the syntax could be better." The C standard did not attempt to correct many of these blemishes, because of the impact of such changes on already existing software.
+\\
+
+\section{Character set[edit]}
+The basic C source character set includes the following characters:
+\\
+
+\begin{itemize}\itemLowercase and uppercase letters of ISO Basic Latin Alphabet: <code>a</code>–<code>z</code> <code>A</code>–<code>Z</code>
+\itemDecimal digits: <code>0</code>–<code>9</code>
+\itemGraphic characters: <code>! " \#&\#160;% &amp; ' ( ) * + , - . /&\#160;:&\#160;; &lt; = &gt;&\#160;? [ \textbackslash ] \^ \_ { | } ~</code>
+\itemWhitespace characters: \emph{space}, \emph{horizontal tab}, \emph{vertical tab}, \emph{form feed}, \emph{newline}\end{itemize}
+Newline indicates the end of a text line; it need not correspond to an actual single character, although for convenience C treats it as one.
+\\
+Additional multi-byte encoded characters may be used in string literals, but they are not entirely portable.  The latest C standard (C11) allows multi-national Unicode characters to be embedded portably within C source text by using <code>\textbackslash XXXX</code> or <code>\textbackslash XXXXXXXX</code> encoding (where the <code>X</code> denotes a hexadecimal character), although this feature is not yet widely implemented.
+\\
+The basic C execution character set contains the same characters, along with representations for alert, backspace, and carriage return. Run-time support for extended character sets has increased with each revision of the C standard.
+\\
+
+\section{Reserved words[edit]}
+C89 has 32 reserved words, also known as keywords, which are the words that cannot be used for any purposes other than those for which they are predefined:
+\\
+
+
+\begin{itemize}\item<code>auto</code>
+\item<code>break</code>
+\item<code>case</code>
+\item<code>char</code>
+\item<code>const</code>
+\item<code>continue</code>
+\item<code>default</code>
+\item<code>do</code>
+\item<code>double</code>
+\item<code>else</code>
+\item<code>enum</code>
+\item<code>extern</code>
+\item<code>float</code>
+\item<code>for</code>
+\item<code>goto</code>
+\item<code>if</code>
+\item<code>int</code>
+\item<code>long</code>
+\item<code>register</code>
+\item<code>return</code>
+\item<code>short</code>
+\item<code>signed</code>
+\item<code>sizeof</code>
+\item<code>static</code>
+\item<code>struct</code>
+\item<code>switch</code>
+\item<code>typedef</code>
+\item<code>union</code>
+\item<code>unsigned</code>
+\item<code>void</code>
+\item<code>volatile</code>
+\item<code>while</code>\end{itemize}
+
+C99 reserved five more words:
+\\
+
+\item\begin{itemize}\item<code>\_Bool</code>
+\item<code>\_Complex</code>
+\item<code>\_Imaginary</code>
+\item<code>inline</code>
+\item<code>restrict</code>\end{itemize}
+
+C11 reserved seven more words:
+\\
+
+\item\begin{itemize}\item<code>\_Alignas</code>
+\item<code>\_Alignof</code>
+\item<code>\_Atomic</code>
+\item<code>\_Generic</code>
+\item<code>\_Noreturn</code>
+\item<code>\_Static\_assert</code>
+\item<code>\_Thread\_local</code>\end{itemize}
+
+Most of the recently reserved words begin with an underscore followed by a capital letter, because identifiers of that form were previously reserved by the C standard for use only by implementations.  Since existing program source code should not have been using these identifiers, it would not be affected when C implementations started supporting these extensions to the programming language.  Some standard headers do define more convenient synonyms for underscored identifiers. The language previously included a reserved word called <code>entry</code>, but this was seldom implemented, and has now been removed as a reserved word.
+\\
+
+\section{Operators[edit]}
+\itemMain article: Operators in C and C++
+C supports a rich set of operators, which are symbols used within an expression to specify the manipulations to be performed while evaluating that expression. C has operators for:
+\\
+
+\begin{itemize}\itemarithmetic: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>
+\itemassignment: <code>=</code>
+\itemaugmented assignment: <code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>%=</code>,<code>&amp;=</code>,<code>|=</code>,<code>\^=</code>,<code>&lt;&lt;=</code>,<code>&gt;&gt;=</code>
+\itembitwise logic: <code>~</code>, <code>&amp;</code>, <code>|</code>, <code>\^</code>
+\itembitwise shifts: <code>&lt;&lt;</code>, <code>&gt;&gt;</code>
+\itemboolean logic: <code>!</code>, <code>&amp;&amp;</code>, <code>||</code>
+\itemconditional evaluation: <code>?&\#160;:</code>
+\itemequality testing: <code>==</code>, <code>!=</code>
+\itemcalling functions: <code>( )</code>
+\itemincrement and decrement: <code>++</code>, <code>--</code>
+\itemmember selection: <code>.</code>, <code>-&gt;</code>
+\itemobject size: <code>sizeof</code>
+\itemorder relations: <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>
+\itemreference and dereference: <code>&amp;</code>, <code>*</code>, <code>[ ]</code>
+\itemsequencing: <code>,</code>
+\itemsubexpression grouping: <code>( )</code>
+\itemtype conversion: <code>(\emph{typename})</code>\end{itemize}
+C uses the operator <code>=</code> (used in mathematics to express equality) to indicate assignment, following the precedent of Fortran and PL/I, but unlike ALGOL and its derivatives. C uses the operator <code>==</code> to test for equality.  The similarity between these two operators (assignment and equality) may result in the accidental use of one in place of the other, and in many cases, the mistake does not produce an error message (although some compilers produce warnings). For example, the conditional expression  <code>if (a == b + 1)</code> might mistakenly be written as <code>if (a = b + 1)</code>, which will be evaluated as true if <code>a</code> is not zero after the assignment.
+\\
+The C operator precedence is not always intuitive.  For example, the operator <code>==</code> binds more tightly than (is executed prior to) the operators <code>&amp;</code> (bitwise AND) and <code>|</code> (bitwise OR) in expressions such as <code>x &amp; 1 == 0</code>, which must be written as <code>(x &amp; 1) == 0</code> if that is the coder's intent.
+\\
+
+\section{"Hello, world" example[edit]}
+  "Hello, World!" program by Brian Kernighan (1978)
+\itemSee also: Hello, world
+The "hello, world" example, which appeared in the first edition of \emph{K&amp;R}, has become the model for an introductory program in most programming textbooks. The program prints "hello, world" to the standard output, which is usually a terminal or screen display.
+\\
+The original version was:
+\\
+
+main()
+{
+    printf(&quot;hello, world\textbackslash &quot;);
+}
+
+A standard-conforming "hello, world" program is:
+\\
+
+\# include &lt;stdio.h&gt;
+
+int main(void)
+{
+    printf(&quot;hello, world\textbackslash &quot;);
+}
+
+The first line of the program contains a preprocessing directive, indicated by <code>\#include</code>.  This causes the compiler to replace that line with the entire text of the <code>stdio.h</code> standard header, which contains declarations for standard input and output functions such as <code>printf</code> and <code>scanf</code>. The angle brackets surrounding <code>stdio.h</code> indicate that <code>stdio.h</code> is located using a search strategy that prefers headers provided with the compiler to other headers having the same name, as opposed to double quotes which typically include local or project-specific header files.
+\\
+The next line indicates that a function named <code>main</code> is being defined. The <code>main</code> function serves a special purpose in C programs; the run-time environment calls the <code>main</code> function to begin program execution. The type specifier <code>int</code> indicates that the value that is returned to the invoker (in this case the run-time environment) as a result of evaluating the <code>main</code> function, is an integer. The keyword <code>void</code> as a parameter list indicates that this function takes no arguments.
+\\
+The opening curly brace indicates the beginning of the definition of the <code>main</code> function.
+\\
+The next line \emph{calls} (diverts execution to) a function named <code>printf</code>, which in this case is supplied from a system library.  In this call, the <code>printf</code> function is \emph{passed} (provided with) a single argument, the address of the first character in the string literal <code>"hello, world\textbackslash "</code>. The string literal is an unnamed array with elements of type <code>char</code>, set up automatically by the compiler with a final 0-valued character to mark the end of the array (<code>printf</code> needs to know this). The <code>\textbackslash </code> is an \emph{escape sequence} that C translates to a \emph{newline} character, which on output signifies the end of the current line.  The return value of the <code>printf</code> function is of type <code>int</code>, but it is silently discarded since it is not used. (A more careful program might test the return value to determine whether or not the <code>printf</code> function succeeded.) The semicolon <code>;</code> terminates the statement.
+\\
+The closing curly brace indicates the end of the code for the <code>main</code> function. According to the C99 specification and newer, the <code>main</code> function, unlike any other function, will implicitly return a value of <code>0</code> upon reaching the <code>}</code> that terminates the function. (Formerly an explicit <code>return 0;</code> statement was required.) This is interpreted by the run-time system as an exit code indicating successful execution.
+\\
+
+\section{Data types[edit]}
+\itemMain article: C variable types and declarations
+
+The type system in C is static and weakly typed, which makes it similar to the type system of ALGOL descendants such as Pascal.  There are built-in types for integers of various sizes, both signed and unsigned, floating-point numbers, and enumerated types (<code>enum</code>).  Integer type <code>char</code> is often used for single-byte characters.  C99 added a boolean datatype.  There are also derived types including arrays, pointers, records (<code>struct</code>), and unions (<code>union</code>).
+\\
+C is often used in low-level systems programming where escapes from the type system may be necessary.  The compiler attempts to ensure type correctness of most expressions, but the programmer can override the checks in various ways, either by using a \emph{type cast} to explicitly convert a value from one type to another, or by using pointers or unions to reinterpret the underlying bits of a data object in some other way.
+\\
+Some find C's declaration syntax unintuitive, particularly for function pointers. (Ritchie's idea was to declare identifiers in contexts resembling their use: "declaration reflects use".)
+\\
+C's \emph{usual arithmetic conversions} allow for efficient code to be generated, but can sometimes produce unexpected results.  For example, a comparison of signed and unsigned integers of equal width requires a conversion of the signed value to unsigned.  This can generate unexpected results if the signed value is negative.
+\\
+
+\section{Pointers[edit]}
+C supports the use of pointers, a type of reference that records the address or location of an object or function in memory.  Pointers can be \emph{dereferenced} to access data stored at the address pointed to, or to invoke a pointed-to function.  Pointers can be manipulated using assignment or pointer arithmetic.  The run-time representation of a pointer value is typically a raw memory address (perhaps augmented by an offset-within-word field), but since a pointer's type includes the type of the thing pointed to, expressions including pointers can be type-checked at compile time.  Pointer arithmetic is automatically scaled by the size of the pointed-to data type. Pointers are used for many purposes in C.  Text strings are commonly manipulated using pointers into arrays of characters.  Dynamic memory allocation is performed using pointers.  Many data types, such as trees, are commonly implemented as dynamically allocated <code>struct</code> objects linked together using pointers.  Pointers to functions are useful for passing functions as arguments to higher-order functions (such as qsort or bsearch) or as callbacks to be invoked by event handlers.
+\\
+A \emph{null pointer value} explicitly points to no valid location. Dereferencing a null pointer value is undefined, often resulting in a segmentation fault.  Null pointer values are useful for indicating special cases such as no "next" pointer in the final node of a linked list, or as an error indication from functions returning pointers.  In appropriate contexts in source code, such as for assigning to a pointer variable, a \emph{null pointer constant} can be written as <code>0</code>, with or without explicit casting to a pointer type, or as the <code>NULL</code> macro defined by several standard headers.  In conditional contexts, null pointer values evaluate to false, while all other pointer values evaluate to true.
+\\
+Void pointers (<code>void *</code>) point to objects of unspecified type, and can therefore be used as "generic" data pointers. Since the size and type of the pointed-to object is not known, void pointers cannot be dereferenced, nor is pointer arithmetic on them allowed, although they can easily be (and in many contexts implicitly are) converted to and from any other object pointer type.
+\\
+Careless use of pointers is potentially dangerous.  Because they are typically unchecked, a pointer variable can be made to point to any arbitrary location, which can cause undesirable effects.  Although properly used pointers point to safe places, they can be made to point to unsafe places by using invalid pointer arithmetic; the objects they point to may continue to be used after deallocation (dangling pointers); they may be used without having been initialized (wild pointers); or they may be directly assigned an unsafe value using a cast, union, or through another corrupt pointer.  In general, C is permissive in allowing manipulation of and conversion between pointer types, although compilers typically provide options for various levels of checking. Some other programming languages address these problems by using more restrictive reference types.
+\\
+
+\section{Arrays[edit]}
+\itemSee also: C string
+Array types in C are traditionally of a fixed, static size specified at compile time.  (The more recent C99 standard also allows a form of variable-length arrays.)  However, it is also possible to allocate a block of memory (of arbitrary size) at run-time, using the standard library's <code>malloc</code> function, and treat it as an array.  C's unification of arrays and pointers means that declared arrays and these dynamically allocated simulated arrays are virtually interchangeable.
+\\
+Since arrays are always accessed (in effect) via pointers, array accesses are typically \emph{not} checked against the underlying array size, although some compilers may provide bounds checking as an option.  Array bounds violations are therefore possible and rather common in carelessly written code, and can lead to various repercussions, including illegal memory accesses, corruption of data, buffer overruns, and run-time exceptions.  If bounds checking is desired, it must be done manually.
+\\
+C does not have a special provision for declaring multi-dimensional arrays, but rather relies on recursion within the type system to declare arrays of arrays, which effectively accomplishes the same thing.  The index values of the resulting "multi-dimensional array" can be thought of as increasing in row-major order.
+\\
+Multi-dimensional arrays are commonly used in numerical algorithms (mainly from applied linear algebra) to store matrices. The structure of the C array is well suited to this particular task. However, since arrays are passed merely as pointers, the bounds of the array must be known fixed values or else explicitly passed to any subroutine that requires them, and dynamically sized arrays of arrays cannot be accessed using double indexing. (A workaround for this is to allocate the array with an additional "row vector" of pointers to the columns.)
+\\
+C99 introduced "variable-length arrays" which address some, but not all, of the issues with ordinary C arrays.
+\\
+
+\section{Array–pointer interchangeability[edit]}
+The subscript notation <code>x[i]</code> (where <code>x</code> designates a pointer) is syntactic sugar for <code>*(x+i)</code>. Taking advantage of the compiler's knowledge of the pointer type, the address that <code>x + i</code> points to is not the base address (pointed to by <code>x</code>) incremented by <code>i</code> bytes, but rather is defined to be the base address incremented by <code>i</code> multiplied by the size of an element that <code>x</code> points to.  Thus, <code>x[i]</code> designates the <code>i+1</code>th element of the array.
+\\
+Furthermore, in most expression contexts (a notable exception is as operand of <code>sizeof</code>), the name of an array is automatically converted to a pointer to the array's first element. This implies that an array is never copied as a whole when named as an argument to a function, but rather only the address of its first element is passed. Therefore, although function calls in C use pass-by-value semantics, arrays are in effect passed by reference.
+\\
+The size of an element can be determined by applying the operator <code>sizeof</code> to any dereferenced element of <code>x</code>, as in <code>n = sizeof *x</code> or <code>n = sizeof x[0]</code>, and the number of elements in a declared array <code>A</code> can be determined as <code>sizeof A / sizeof A[0]</code>. The latter only applies to array names: variables declared with subscripts (<code>int A[20]</code>). Due to the semantics of C, it is not possible to determine the entire size of arrays through pointers to arrays, such as arrays created by dynamic allocation (<code>malloc</code>) or array function parameters; code such as <code>sizeof arr / sizeof arr[0]</code> (where <code>arr</code> designates a pointer) will not work since the compiler assumes the size of the pointer itself is being requested. Since array name arguments to <code>sizeof</code> are not converted to pointers, they do not exhibit such ambiguity. However, arrays created by dynamic allocation are accessed by pointers rather than true array variables, so they suffer from the same <code>sizeof</code> issues as array pointers.
+\\
+Thus, despite this apparent equivalence between array and pointer variables, there is still a distinction to be made between them. Even though the name of an array is, in most expression contexts, converted into a pointer (to its first element), this pointer does not itself occupy any storage; the array name is not an l-value, and its address is a constant, unlike a pointer variable. Consequently, what an array "points to" cannot be changed, and it is impossible to assign a new address to an array name. Array contents may be copied, however, by using the <code>memcpy</code> function, or by accessing the individual elements.
+\\
+
+\section{Memory management[edit]}
+One of the most important functions of a programming language is to provide facilities for managing memory and the objects that are stored in memory. C provides three distinct ways to allocate memory for objects:
+\\
+
+\begin{itemize}\itemStatic memory allocation: space for the object is provided in the binary at compile-time; these objects have an extent (or lifetime) as long as the binary which contains them is loaded into memory.
+\itemAutomatic memory allocation: temporary objects can be stored on the stack, and this space is automatically freed and reusable after the block in which they are declared is exited.
+\itemDynamic memory allocation: blocks of memory of arbitrary size can be requested at run-time using library functions such as <code>malloc</code> from a region of memory called the heap; these blocks persist until subsequently freed for reuse by calling the library function <code>realloc</code> or <code>free</code>\end{itemize}
+These three approaches are appropriate in different situations and have various trade-offs. For example, static memory allocation has little allocation overhead, automatic allocation may involve slightly more overhead, and dynamic memory allocation can potentially have a great deal of overhead for both allocation and deallocation. The persistent nature of static objects is useful for maintaining state information across function calls, automatic allocation is easy to use but stack space is typically much more limited and transient than either static memory or heap space, and dynamic memory allocation allows convenient allocation of objects whose size is known only at run-time. Most C programs make extensive use of all three.
+\\
+Where possible, automatic or static allocation is usually simplest because the storage is managed by the compiler, freeing the programmer of the potentially error-prone chore of manually allocating and releasing storage. However, many data structures can change in size at runtime, and since static allocations (and automatic allocations before C99) must have a fixed size at compile-time, there are many situations in which dynamic allocation is necessary.  Prior to the C99 standard, variable-sized arrays were a common example of this. (See the article on <code>malloc</code> for an example of dynamically allocated arrays.) Unlike automatic allocation, which can fail at run time with uncontrolled consequences, the dynamic allocation functions return an indication (in the form of a null pointer value) when the required storage cannot be allocated.  (Static allocation that is too large is usually detected by the linker or loader, before the program can even begin execution.)
+\\
+Unless otherwise specified, static objects contain zero or null pointer values upon program startup. Automatically and dynamically allocated objects are initialized only if an initial value is explicitly specified; otherwise they initially have indeterminate values (typically, whatever bit pattern happens to be present in the storage, which might not even represent a valid value for that type). If the program attempts to access an uninitialized value, the results are undefined. Many modern compilers try to detect and warn about this problem, but both false positives and false negatives can occur.
+\\
+Heap memory allocation has to be synchronized with its actual usage in any program to be reused as much as possible. For example, if the only pointer to a heap memory allocation goes out of scope or has its value overwritten before it is deallocated explicitly, then that memory cannot be recovered for later reuse and is essentially lost to the program, a phenomenon known as a \emph{memory leak.} Conversely, it is possible for memory to be freed, but is referenced subsequently, leading to unpredictable results. Typically, the failure symptoms appear in a portion of the program unrelated to the code that causes the error, making it difficult to diagnose the failure. Such issues are ameliorated in languages with automatic garbage collection.
+\\
+
+\section{Libraries[edit]}
+The C programming language uses libraries as its primary method of extension. In C, a library is a set of functions contained within a single "archive" file.  Each library typically has a header file, which contains the prototypes of the functions contained within the library that may be used by a program, and declarations of special data types and macro symbols used with these functions. In order for a program to use a library, it must include the library's header file, and the library must be linked with the program, which in many cases requires compiler flags (e.g., <code>-lm</code>, shorthand for "link the math library").
+\\
+The most common C library is the C standard library, which is specified by the ISO and ANSI C standards and comes with every C implementation (implementations which target limited environments such as embedded systems may provide only a subset of the standard library). This library supports stream input and output, memory allocation, mathematics, character strings, and time values.  Several separate standard headers (for example, <code>stdio.h</code>) specify the interfaces for these and other standard library facilities.
+\\
+Another common set of C library functions are those used by applications specifically targeted for Unix and Unix-like systems, especially functions which provide an interface to the kernel. These functions are detailed in various standards such as POSIX and the Single UNIX Specification.
+\\
+Since many programs have been written in C, there are a wide variety of other libraries available. Libraries are often written in C because C compilers generate efficient object code; programmers then create interfaces to the library so that the routines can be used from higher-level languages like Java, Perl, and Python.
+\\
+
+\section{File handling and streams[edit]}
+File input and output (I/O) is not part of the C language itself but instead is handled by libraries (such as the C standard library) and their associated header files (e.g. <code>stdio.h</code>). File handling is generally implemented through high-level I/O which works through streams. A stream is from this perspective a data flow that is independent of devices, while a file is a concrete device. The high level I/O is done through the association of a stream to a file. In the C standard library, a buffer (a memory area or queue) is temporarily used to store data before it's sent to the final destination. This reduces the time spent waiting for slower devices, for example a hard drive or solid state drive. Low-level I/O functions are not part of the standard C library but are generally part of "bare metal" programming (programming that's independent of any operating system such as most but not all embedded programming). With few exceptions, implementations include low-level I/O.
+\\
+
+\section{Language tools[edit]}
+
+A number of tools have been developed to help C programmers find and fix statements with undefined behavior or possibly erroneous expressions, with greater rigor than that provided by the compiler.  The tool lint was the first such, leading to many others.
+\\
+Automated source code checking and auditing are beneficial in any language, and for C many such tools exist, such as Lint. A common practice is to use Lint to detect questionable code when a program is first written. Once a program passes Lint, it is then compiled using the C compiler. Also, many compilers can optionally warn about syntactically valid constructs that are likely to actually be errors. MISRA C is a proprietary set of guidelines to avoid such questionable code, developed for embedded systems.
+\\
+There are also compilers, libraries, and operating system level mechanisms for performing actions that are not a standard part of C, such as bounds checking for arrays, detection of buffer overflow, serialization, dynamic memory tracking, and automatic garbage collection.
+\\
+Tools such as Purify or Valgrind and linking with libraries containing special versions of the memory allocation functions can help uncover runtime errors in memory usage.
+\\
+
+\section{Uses[edit]}
+  The TIOBE index graph, showing a comparison of the popularity of various programming languages
+C is widely used for systems programming in implementing operating systems and embedded system applications, because C code, when written for portability, can be used for most purposes, yet when needed, system-specific code can be used to access specific hardware addresses and to perform type punning to match externally imposed interface requirements, with a low run-time demand on system resources.
+\\
+C can be used for website programming using the Common Gateway Interface (CGI) as a "gateway" for information between the Web application, the server, and the browser. C is often chosen over interpreted languages because of its speed, stability, and near-universal availability.
+\\
+A consequence of C's wide availability and efficiency is that compilers, libraries and interpreters of other programming languages are often implemented in C. For example, the reference implementations of Python, Perl, Ruby, and PHP are written in C.
+\\
+C enables programmers to create efficient implementations of algorithms and data structures, because the layer of abstraction from hardware is thin, and its overhead is low, an important criterion for computationally intensive programs. For example, the GNU Multiple Precision Arithmetic Library, the GNU Scientific Library, Mathematica, and MATLAB are completely or partially written in C.
+\\
+C is sometimes used as an intermediate language by implementations of other languages. This approach may be used for portability or convenience; by using C as an intermediate language, additional machine-specific code generators are not necessary.  C has some features, such as line-number preprocessor directives and optional superfluous commas at the end of initializer lists, that support compilation of generated code. However, some of C's shortcomings have prompted the development of other C-based languages specifically designed for use as intermediate languages, such as C--.
+\\
+C has also been widely used to implement end-user applications. However, such applications can also be written in newer, higher-level languages.
+\\
+
+\section{Related languages[edit]}
+C has both directly and indirectly influenced many later languages such as C\#, D, Go, Java, JavaScript, Limbo, LPC, Perl, PHP, Python, and Unix's C shell. The most pervasive influence has been syntactical; all of the languages mentioned combine the statement and (more or less recognizably) expression syntax of C with type systems, data models, and/or large-scale program structures that differ from those of C, sometimes radically.
+\\
+Several C or near-C interpreters exist, including Ch and CINT, which can also be used for scripting.
+\\
+When object-oriented languages became popular, C++ and Objective-C were two different extensions of C that provided object-oriented capabilities. Both languages were originally implemented as source-to-source compilers; source code was translated into C, and then compiled with a C compiler.
+\\
+The C++ programming language was devised by Bjarne Stroustrup as an approach to providing object-oriented functionality with a C-like syntax. C++ adds greater typing strength, scoping, and other tools useful in object-oriented programming, and permits generic programming via templates. Nearly a superset of C, C++ now supports most of C, with a few exceptions.
+\\
+Objective-C was originally a very "thin" layer on top of C, and remains a strict superset of C that permits object-oriented programming using a hybrid dynamic/static typing paradigm. Objective-C derives its syntax from both C and Smalltalk: syntax that involves preprocessing, expressions, function declarations, and function calls is inherited from C, while the syntax for object-oriented features was originally taken from Smalltalk.
+\\
+In addition to C++ and Objective-C, Ch, Cilk, and Unified Parallel C are nearly supersets of C.
+\\
+
+\section{See also[edit]}
+
+\begin{itemize}
+\itemComputer programming portal
+\itemFree and open-source software portal\end{itemize}
+\begin{itemize}\itemCompatibility of C and C++
+\itemComparison of Pascal and C
+\itemComparison of programming languages
+\itemInternational Obfuscated C Code Contest
+\itemList of C-based programming languages
+\itemList of C compilers\end{itemize}
+\section{Notes[edit]}
+
+<ol class="references">
+\item\textbf{\^} The original example code will compile on most modern compilers that are not in strict standard compliance mode, but it does not fully conform to the requirements of either C89 or C99. In fact, C99 requires that a diagnostic message be produced.
+
+\item\textbf{\^} The <code>main</code> function actually has two arguments, <code>int argc</code> and <code>char *argv[]</code>, respectively, which can be used to handle command line arguments.  The ISO C standard (section 5.1.2.2.1) requires both forms of <code>main</code> to be supported, which is special treatment not afforded to any other function.
+
+</ol>
+\section{References[edit]}
+\item<ol class="references">
+\item\^   <cite id="CITEREFKernighanRitchie1978" class="citation book cs1">Kernighan, Brian W.; Ritchie, Dennis M. (February 1978). \emph{The C Programming Language} (1st&\#160;ed.). Englewood Cliffs, NJ: Prentice Hall. ISBN&\#160;<bdi>978-0-13-110163-0</bdi>.</cite>
+
+\item\textbf{\^} Ritchie (1993): "Thompson had made a brief attempt to produce a system coded in an early version of C—before structures—in 1972, but gave up the effort."
+
+\item\textbf{\^} \item<cite id="CITEREFFruderica2020" class="citation web cs1">Fruderica (December 13, 2020). "History of C". \emph{The cppreference.com}. Retrieved October 24, 2020.</cite>
+
+\item\textbf{\^} Ritchie (1993): "The scheme of type composition adopted by C owes considerable debt to Algol 68, although it did not, perhaps, emerge in a form that Algol's adherents would approve of."
+
+\item\^   \item<cite class="citation web cs1">"Verilog HDL (and C)" (PDF). The Research School of Computer Science at the Australian National University. June 3, 2010. Archived from the original (PDF) on November 6, 2013. Retrieved August 19, 2013. <q>1980s:&\#160;; Verilog first introduced&\#160;; Verilog inspired by the C programming language</q></cite>
+
+\item\^      Ritchie (1993)
+
+\item\textbf{\^} \item<cite class="citation web cs1">"Programming Language Popularity". 2009. Archived from the original on January 16, 2009. Retrieved January 16, 2009.</cite>
+
+\item\textbf{\^} \item<cite class="citation web cs1">"TIOBE Programming Community Index". 2009. Archived from the original on May 4, 2009. Retrieved May 6, 2009.</cite>
+
+\item\^   \item<cite class="citation web cs1">"History of C". \emph{en.cppreference.com}.</cite>
+
+\item\textbf{\^} \item<cite class="citation web cs1">"TIOBE Index for January 2021". Archived from the original on January 12, 2021. Retrieved January 19, 2021.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFRitchie" class="citation web cs1">Ritchie, Dennis. "BCPL to B to C".</cite>
+
+\item\^   \item<cite id="CITEREFJohnsonRitchie1978" class="citation journal cs1">Johnson, S. C.; Ritchie, D. M. (1978). "Portability of C Programs and the UNIX System". \emph{Bell System Tech. J}. \textbf{57} (6): 2021–2048. CiteSeerX&\#160;10.1.1.138.35. doi:10.1002/j.1538-7305.1978.tb02141.x. S2CID&\#160;17510065.</cite> (Note: The PDF is an OCR scan of the original, and contains a rendering of "IBM 370" as "IBM 310".)
+
+\item\textbf{\^} \item<cite id="CITEREFMcIlroy1987" class="citation techreport cs1">McIlroy, M. D. (1987). \emph{A Research Unix reader: annotated excerpts from the Programmer's Manual, 1971–1986} (PDF) (Technical report). CSTR. Bell Labs. p.&\#160;10. 139.</cite>
+
+\item\textbf{\^} \item<cite class="citation book cs1">"C manual pages". \emph{FreeBSD Miscellaneous Information Manual} (FreeBSD 13.0&\#160;ed.). May 30, 2011.</cite> [1]
+
+\item\textbf{\^} \item<cite id="CITEREFKernighanRitchie1988" class="citation book cs1">Kernighan, Brian W.; Ritchie, Dennis M. (March 1988). \emph{The C Programming Language} (2nd&\#160;ed.). Englewood Cliffs, NJ: Prentice Hall. ISBN&\#160;<bdi>978-0-13-110362-7</bdi>.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFStroustrup2002" class="citation report cs1">Stroustrup, Bjarne (2002). Sibling rivalry: C and C++ (PDF) (Report). AT&amp;T Labs.</cite>
+
+\item\textbf{\^} \item<cite class="citation book cs1">\emph{C Integrity}. International Organization for Standardization. March 30, 1995.</cite>
+
+\item\textbf{\^} \item<cite class="citation web cs1">"JTC1/SC22/WG14&\#160;– C". \emph{Home page}. ISO/IEC. Retrieved June 2, 2011.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFAndrew\_Binstock2011" class="citation web cs1">Andrew Binstock (October 12, 2011). "Interview with Herb Sutter". \emph{Dr. Dobbs}. Retrieved September 7, 2013.</cite>
+
+\item\textbf{\^} \item<cite class="citation web cs1">"TR 18037: Embedded C" (PDF). ISO / IEC. Retrieved July 26, 2011.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFHarbisonSteele2002" class="citation book cs1">Harbison, Samuel P.; Steele, Guy L. (2002). \emph{C: A Reference Manual} (5th&\#160;ed.). Englewood Cliffs, NJ: Prentice Hall. ISBN&\#160;<bdi>978-0-13-089592-9</bdi>.</cite> Contains a BNF grammar for C.
+
+\item\textbf{\^} Kernighan &amp; Ritchie (1996), p.&\#160;192.
+
+\item\textbf{\^} Kernighan &amp; Ritchie (1978), p.&\#160;3.
+
+\item\textbf{\^} \item<cite class="citation web cs1">"ISO/IEC 9899:201x (ISO C11) Committee Draft" (PDF).</cite>
+
+\item\textbf{\^} Kernighan &amp; Ritchie (1996), pp.&\#160;192, 259.
+
+\item\textbf{\^} \item<cite class="citation web cs1">"10 Common Programming Mistakes in C++". Cs.ucr.edu. Retrieved June 26, 2009.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFSchultz2004" class="citation book cs1">Schultz, Thomas (2004). \emph{C and the 8051} (3rd&\#160;ed.). Otsego, MI: PageFree Publishing Inc. p.&\#160;20. ISBN&\#160;<bdi>978-1-58961-237-2</bdi>. Retrieved February 10, 2012.</cite>
+
+\item\textbf{\^} Kernighan &amp; Ritchie (1978), p.&\#160;6.
+
+\item\^        \item<cite id="CITEREFKlemens2013" class="citation book cs1">Klemens, Ben (2013). \emph{21st Century C}. O'Reilly Media. ISBN&\#160;<bdi>978-1-4493-2714-9</bdi>.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFFeuerGehani1982" class="citation journal cs1">Feuer, Alan R.; Gehani, Narain H. (March 1982). "Comparison of the Programming Languages C and Pascal". \emph{ACM Computing Surveys}. \textbf{14} (1): 73–92. doi:10.1145/356869.356872. S2CID&\#160;3136859.</cite>
+
+\item\textbf{\^} Kernighan &amp; Ritchie (1996), p.&\#160;122.
+
+\item\textbf{\^} For example, gcc provides \_FORTIFY\_SOURCE. \item<cite class="citation web cs1">"Security Features: Compile Time Buffer Checks (FORTIFY\_SOURCE)". fedoraproject.org. Retrieved August 5, 2012.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFเอี่ยมสิริวงศ์2016" class="citation book cs1">เอี่ยมสิริวงศ์, โอภาศ (2016). \emph{Programming with C}. Bangkok, Thailand: SE-EDUCATION PUBLIC COMPANY LIMITED. pp.&\#160;225–230. ISBN&\#160;<bdi>978-616-08-2740-4</bdi>.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFRaymond1996" class="citation book cs1">Raymond, Eric S. (October 11, 1996). \emph{The New Hacker's Dictionary} (3rd&\#160;ed.). MIT Press. p.&\#160;432. ISBN&\#160;<bdi>978-0-262-68092-9</bdi>. Retrieved August 5, 2012.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFSummit,\_Steve" class="citation web cs1">Summit, Steve. "comp.lang.c Frequently Asked Questions 6.23". Retrieved March 6, 2013.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFSummit,\_Steve" class="citation web cs1">Summit, Steve. "comp.lang.c Frequently Asked Questions 7.28". Retrieved March 6, 2013.</cite>
+
+\item\textbf{\^} \item<cite class="citation web cs1">"Man Page for lint (freebsd Section 1)". \emph{unix.com}. May 24, 2001. Retrieved July 15, 2014.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFMcMillan2013" class="citation magazine cs1">McMillan, Robert (August 1, 2013). "Is Java Losing Its Mojo?". \emph{Wired}.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFDaleWeems2014" class="citation book cs1">Dale, Nell B.; Weems, Chip (2014). \emph{Programming and problem solving with C++} (6th&\#160;ed.). Burlington, MA: Jones &amp; Bartlett Learning. ISBN&\#160;<bdi>978-1449694289</bdi>. OCLC&\#160;894992484.</cite>
+
+\item\textbf{\^} \item<cite class="citation book cs1">\emph{Dr. Dobb's Sourcebook}. U.S.A.: Miller Freeman, Inc. November–December 1995.</cite>
+
+\item\textbf{\^} \item<cite class="citation web cs1">"Using C for CGI Programming". linuxjournal.com. March 1, 2005. Retrieved January 4, 2010.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFO&\#39;Regan2015" class="citation book cs1">O'Regan, Gerard (September 24, 2015). \emph{Pillars of computing&\#160;: a compendium of select, pivotal technology firms}. ISBN&\#160;<bdi>978-3319214641</bdi>. OCLC&\#160;922324121.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFRauchwerger2004" class="citation book cs1">Rauchwerger, Lawrence (2004). \emph{Languages and compilers for parallel computing&\#160;: 16th international workshop, LCPC 2003, College Station, TX, USA, October 2-4, 2003&\#160;: revised papers}. Springer. ISBN&\#160;<bdi>978-3540246442</bdi>. OCLC&\#160;57965544.</cite>
+
+\item\textbf{\^} \item<cite id="CITEREFStroustrup1993" class="citation web cs1">Stroustrup, Bjarne (1993). "A History of C++: 1979−1991" (PDF). Retrieved June 9, 2011.</cite>
+
+</ol>
+\section{Sources[edit]}
+\begin{itemize}\item\item<cite id="CITEREFRitchie1993" class="citation journal cs1">Ritchie, Dennis M. (March 1993). "The Development of the C Language". \emph{ACM SIGPLAN Notices}. ACM. \textbf{28} (3): 201–208. doi:10.1145/155360.155580.</cite><br />\item<cite class="citation conference cs1">Ritchie, Dennis M. (1993). "The Development of the C Language". \emph{The Second ACM SIGPLAN Conference on History of Programming Languages (HOPL-II)}. ACM. pp.&\#160;201–208. doi:10.1145/154766.155580. ISBN&\#160;<bdi>0-89791-570-4</bdi>. Retrieved November 4, 2014.</cite>
+\item\item<cite id="CITEREFKernighanRitchie1996" class="citation book cs1">Kernighan, Brian W.; Ritchie, Dennis M. (1996). \emph{The C Programming Language} (2nd&\#160;ed.). Prentice Hall. ISBN&\#160;<bdi>7-302-02412-X</bdi>.</cite>\end{itemize}
+\section{Further reading[edit]}
+\begin{itemize}\item\item<cite id="CITEREFKernighanRitchie1988" class="citation book cs1">Kernighan, Brian; Ritchie, Dennis (1988). \emph{The C Programming Language} (2&\#160;ed.). Prentice Hall. ISBN&\#160;<bdi>978-0131103627</bdi>.</cite> <small>\emph{(archive)}</small>
+\item\item<cite id="CITEREFPlauger1992" class="citation book cs1">Plauger, P.J. (1992). \emph{The Standard C Library} (1&\#160;ed.). Prentice Hall. ISBN&\#160;<bdi>978-0131315099</bdi>.</cite> <small>\emph{(source)}</small>
+\item\item<cite id="CITEREFBanahanBradyDoran1991" class="citation book cs1">Banahan, M.; Brady, D.; Doran, M. (1991). \emph{The C Book: Featuring the ANSI C Standard} (2&\#160;ed.). Addison-Wesley. ISBN&\#160;<bdi>978-0201544336</bdi>.</cite> <small>\emph{(free)}</small>
+\item\item<cite id="CITEREFHarbisonSteele\_Jr2002" class="citation book cs1">Harbison, Samuel; Steele Jr, Guy (2002). \emph{C: A Reference Manual} (5&\#160;ed.). Pearson. ISBN&\#160;<bdi>978-0130895929</bdi>.</cite> <small>\emph{(archive)}</small>
+\item\item<cite id="CITEREFKing2008" class="citation book cs1">King, K.N. (2008). \emph{C Programming: A Modern Approach} (2&\#160;ed.). W. W. Norton. ISBN&\#160;<bdi>978-0393979503</bdi>.</cite> <small>\emph{(archive)}</small>
+\item\item<cite id="CITEREFGriffithsGriffiths2012" class="citation book cs1">Griffiths, David; Griffiths, Dawn (2012). \emph{Head First C} (1&\#160;ed.). O'Reilly. ISBN&\#160;<bdi>978-1449399917</bdi>.</cite>
+\item\item<cite id="CITEREFPerryMiller2013" class="citation book cs1">Perry, Greg; Miller, Dean (2013). \emph{C Programming: Absolute Beginner's Guide} (3&\#160;ed.). Que. ISBN&\#160;<bdi>978-0789751980</bdi>.</cite>
+\item\item<cite id="CITEREFDeitelDeitel2015" class="citation book cs1">Deitel, Paul; Deitel, Harvey (2015). \emph{C: How to Program} (8&\#160;ed.). Pearson. ISBN&\#160;<bdi>978-0133976892</bdi>.</cite>
+\item\item<cite id="CITEREFGustedt2019" class="citation book cs1">Gustedt, Jens (2019). \emph{Modern C} (2&\#160;ed.). Manning. ISBN&\#160;<bdi>978-1617295812</bdi>.</cite> <small>\emph{(free)}</small>\end{itemize}
+\section{External links[edit]}
+<b style="display:block">C (programming language)}at Wikipedia's sister projects\begin{itemize}\itemMedia from Wikimedia Commons\itemNews from Wikinews\itemQuotations from Wikiquote\itemTextbooks from Wikibooks\itemResources from Wikiversity\end{itemize}
+\begin{itemize}\itemISO C Working Group official website
+\begin{itemize}\itemISO/IEC 9899, publicly available official C documents, including the C99 Rationale
+\item\item<cite class="citation web cs1">"C99 with Technical corrigenda TC1, TC2, and TC3 included" (PDF).</cite>&\#160;(3.61&\#160;MB)\end{itemize}
+\itemcomp.lang.c Frequently Asked Questions
+\itemA History of C, by Dennis Ritchie\end{itemize}
+
+</td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Java</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">JavaScript</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">CLI</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Flash</th><td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+\begin{itemize}\itemAdobe Flash Builder
+\itemFlashDevelop
+\itemPowerflasher FDT\end{itemize}
+</td></tr><tr><th scope="row" class="navbox-group" style="width:1%">PHP</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">R</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+\begin{itemize}\itemRStudio
+\itemR Tools for Visual Studio\end{itemize}
+</td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Python</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Pascal and <br />Object Pascal</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">BASIC</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Go</th><td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px"></td></tr><tr><th scope="row" class="navbox-group" style="width:1%">Online</th><td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+\begin{itemize}\itemAWS Cloud9 IDE
+\itemEclipse Che
+\itemSourceLair\end{itemize}
+</td></tr><tr><td class="navbox-abovebelow" colspan="2">
+\begin{itemize}\item\textbf{Category}
+\item\textbf{Comparison}\end{itemize}
+</td></tr></tbody></table>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw2307
+Cached time: 20210805165023
+Cache expiry: 86400
+Reduced expiry: true
+Complications: [vary‐revision‐sha1]
+CPU time usage: 1.145 seconds
+Real time usage: 1.466 seconds
+Preprocessor visited node count: 6102/1000000
+Post‐expand include size: 236799/2097152 bytes
+Template argument size: 9873/2097152 bytes
+Highest expansion depth: 27/40
+Expensive parser function count: 15/500
+Unstrip recursion depth: 1/20
+Unstrip post‐expand size: 157901/5000000 bytes
+Lua time usage: 0.548/10.000 seconds
+Lua memory usage: 11144904/52428800 bytes
+Number of Wikibase entities loaded: 1/400
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00% 1143.509      1 -total
+ 26.57%  303.815      2 Template:Reflist
+ 14.18%  162.159     23 Template:Cite\_book
+ 12.02%  137.500      2 Template:Infobox
+  9.28%  106.090      1 Template:Infobox\_programming\_language
+  8.06%   92.184     12 Template:Navbox
+  7.20%   82.325     19 Template:Cite\_web
+  6.88%   78.631      5 Template:Sfnp
+  6.08%   69.515      1 Template:Sister\_project\_links
+  4.93%   56.394      1 Template:Authority\_control
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:6021-0!canonical and timestamp 20210805165022 and revision id 1036050275. Serialized with JSON.
+ -->
+<noscript></noscript>
+Retrieved from "https://en.wikipedia.org/w/index.php?title=C\_(programming\_language)&amp;oldid=1036050275"
+		Categories: \begin{itemize}\itemC (programming language)\itemAmerican inventions\itemC programming language family\itemCross-platform software\itemHigh-level programming languages\itemProcedural programming languages\itemStructured programming languages\itemProgramming languages created in 1972\itemProgramming languages with an ISO standard\itemStatically typed programming languages\itemSystems programming languages\end{itemize}Hidden categories: \begin{itemize}\itemUse mdy dates from March 2020\itemArticles with short description\itemShort description matches Wikidata\itemArticles containing potentially dated statements from January 2021\itemAll articles containing potentially dated statements\itemWikipedia articles in need of updating from February 2021\itemAll Wikipedia articles in need of updating\itemArticles needing additional references from October 2012\itemAll articles needing additional references\itemArticles needing additional references from July 2014\itemPages using Sister project links with wikidata mismatch\itemPages using Sister project links with hidden wikidata\itemPages using Sister project links with default search\itemWikipedia articles with GND identifiers\itemWikipedia articles with BNF identifiers\itemWikipedia articles with LCCN identifiers\itemWikipedia articles with FAST identifiers\itemWikipedia articles with SUDOC identifiers\itemArticles with example C code\end{itemize}
+	
+
+
+	
+
+
+
+	\section{Navigation menu}
+	
+		<nav id="p-personal" class="mw-portlet mw-portlet-personal vector-user-menu-legacy vector-menu" aria-labelledby="p-personal-label" role="navigation" 
+	 >
+	\section{Personal tools}
+	
+		
+		\begin{itemize}\itemNot logged in\itemTalk\itemContributions\itemCreate account\itemLog in\end{itemize}
+		
+	
+</nav>
+
+		
+			<nav id="p-namespaces" class="mw-portlet mw-portlet-namespaces vector-menu vector-menu-tabs" aria-labelledby="p-namespaces-label" role="navigation" 
+	 >
+	\section{Namespaces}
+	
+		
+		\begin{itemize}\itemArticle\itemTalk\end{itemize}
+		
+	
+</nav>
+
+			<nav id="p-variants" class="mw-portlet mw-portlet-variants emptyPortlet vector-menu vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation" 
+	 >
+	<input type="checkbox"
+		data-event-name="ui.dropdown-p-variants"
+		class="vector-menu-checkbox" aria-labelledby="p-variants-label" />
+	\section{Variants}
+	
+		
+		\begin{itemize}\end{itemize}
+		
+	
+</nav>
+
+		
+		
+			<nav id="p-views" class="mw-portlet mw-portlet-views vector-menu vector-menu-tabs" aria-labelledby="p-views-label" role="navigation" 
+	 >
+	\section{Views}
+	
+		
+		\begin{itemize}\itemRead\itemEdit\itemView history\end{itemize}
+		
+	
+</nav>
+
+			<nav id="p-cactions" class="mw-portlet mw-portlet-cactions emptyPortlet vector-menu vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation" 
+	 >
+	<input type="checkbox"
+		data-event-name="ui.dropdown-p-cactions"
+		class="vector-menu-checkbox" aria-labelledby="p-cactions-label" />
+	\section{More}
+	
+		
+		\begin{itemize}\end{itemize}
+		
+	
+</nav>
+
+			
+	
+		\section{}
+		<form action="/w/index.php" id="searchform">
+			
+				
+				
+				
+				
+			
+		</form>
+	
+
+
+		
+	
+	
+
+	
+		<a class="mw-wiki-logo" href="/wiki/Main\_Page"
+			title="Visit the main page">
+	
+	<nav id="p-navigation" class="mw-portlet mw-portlet-navigation vector-menu vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation" 
+	 >
+	\section{Navigation}
+	
+		
+		\begin{itemize}\itemMain page\itemContents\itemCurrent events\itemRandom article\itemAbout Wikipedia\itemContact us\itemDonate\end{itemize}
+		
+	
+</nav>
+
+	<nav id="p-interaction" class="mw-portlet mw-portlet-interaction vector-menu vector-menu-portal portal" aria-labelledby="p-interaction-label" role="navigation" 
+	 >
+	\section{Contribute}
+	
+		
+		\begin{itemize}\itemHelp\itemLearn to edit\itemCommunity portal\itemRecent changes\itemUpload file\end{itemize}
+		
+	
+</nav>
+<nav id="p-tb" class="mw-portlet mw-portlet-tb vector-menu vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation" 
+	 >
+	\section{Tools}
+	
+		
+		\begin{itemize}\itemWhat links here\itemRelated changes\itemUpload file\itemSpecial pages\itemPermanent link\itemPage information\itemCite this page\itemWikidata item\end{itemize}
+		
+	
+</nav>
+<nav id="p-coll-print\_export" class="mw-portlet mw-portlet-coll-print\_export vector-menu vector-menu-portal portal" aria-labelledby="p-coll-print\_export-label" role="navigation" 
+	 >
+	\section{Print/export}
+	
+		
+		\begin{itemize}\itemDownload as PDF\itemPrintable version\end{itemize}
+		
+	
+</nav>
+<nav id="p-wikibase-otherprojects" class="mw-portlet mw-portlet-wikibase-otherprojects vector-menu vector-menu-portal portal" aria-labelledby="p-wikibase-otherprojects-label" role="navigation" 
+	 >
+	\section{In other projects}
+	
+		
+		\begin{itemize}\itemWikimedia Commons\itemWikibooks\itemWikiquote\itemWikiversity\end{itemize}
+		
+	
+</nav>
+
+	<nav id="p-lang" class="mw-portlet mw-portlet-lang vector-menu vector-menu-portal portal" aria-labelledby="p-lang-label" role="navigation" 
+	 >
+	\section{Languages}
+	
+		
+		\begin{itemize}\itemAfrikaans\itemAlemannisch\itemአማርኛ\itemالعربية\itemAragonés\itemঅসমীয়া\itemAsturianu\itemAzərbaycanca\itemتۆرکجه\itemবাংলা\itemBân-lâm-gú\itemБеларуская\itemБеларуская (тарашкевіца)\itemभोजपुरी\itemБългарски\itemBosanski\itemBrezhoneg\itemCatalà\itemЧӑвашла\itemČeština\itemCorsu\itemCymraeg\itemDansk\itemDeutsch\itemEesti\itemΕλληνικά\itemEspañol\itemEsperanto\itemEuskara\itemفارسی\itemFrançais\itemGaeilge\itemGalego\itemગુજરાતી\item客家語/Hak-kâ-ngî\item한국어\itemՀայերեն\itemहिन्दी\itemHrvatski\itemBahasa Indonesia\itemInterlingua\itemIsiXhosa\itemÍslenska\itemItaliano\itemעברית\itemJawa\itemಕನ್ನಡ\itemქართული\itemҚазақша\itemKiswahili\itemKurdî\itemКыргызча\itemລາວ\itemLatina\itemLatviešu\itemLietuvių\itemLombard\itemMagyar\itemमैथिली\itemМакедонски\itemMalagasy\itemമലയാളം\itemमराठी\itemBahasa Melayu\itemMìng-dĕ̤ng-ngṳ̄\itemМонгол\itemမြန်မာဘာသာ\itemNederlands\itemनेपाली\item日本語\itemNorsk bokmål\itemNorsk nynorsk\itemOccitan\itemଓଡ଼ିଆ\itemOʻzbekcha/ўзбекча\itemਪੰਜਾਬੀ\itemپنجابی\itemភាសាខ្មែរ\itemPiemontèis\itemPolski\itemPortuguês\itemRomână\itemРусский\itemСаха тыла\itemᱥᱟᱱᱛᱟᱲᱤ\itemScots\itemShqip\itemසිංහල\itemSimple English\itemSlovenčina\itemSlovenščina\itemСрпски / srpski\itemSrpskohrvatski / српскохрватски\itemSuomi\itemSvenska\itemTagalog\itemதமிழ்\itemTaqbaylit\itemТатарча/tatarça\itemతెలుగు\itemไทย\itemТоҷикӣ\itemTürkçe\itemᨅᨔ ᨕᨘᨁᨗ\itemУкраїнська\itemاردو\itemVèneto\itemTiếng Việt\item文言\itemWinaray\item吴语\itemייִדיש\item粵語\itemŽemaitėška\item中文\end{itemize}
+		Edit links
+	
+</nav>
+
+
+
+
+
+
+
+
+
+
+\end{document}
