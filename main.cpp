@@ -8,12 +8,23 @@
 
 using namespace std;
 
+/*
+ * Creates an empty file with the given filename
+ * @input fname - the filename to be created
+*/
+
 void emptyFile(char fname[100]){
   fstream file;
   file.open(fname, std::fstream::out | std::fstream::trunc);
   file.close();
 }
 
+/*
+ * Appends the string 'line' to the end of a file with the 'fname' filename.
+ * If no file exists this function will create it.
+ * @input fname - the filename to be created
+ * @input line - the filename to be created
+*/
 void writeToFile(char fname[100], string line){
   fstream uidlFile(fname, std::fstream::in | std::fstream::out | std::fstream::app);
 
@@ -26,6 +37,10 @@ void writeToFile(char fname[100], string line){
   }
 }
 
+/*
+ * Initializes a LaTeX document with a.5 inch margin and underlines on every section.
+ * @input fname - the name of the LaTeC file 
+*/
 void initLatexDoc(char fname[100]){
 
   string init = "\\documentclass{article}"
@@ -58,6 +73,13 @@ void initLatexDoc(char fname[100]){
 
   writeToFile(fname, init);
 }
+
+/*
+ * Filters the buffer string to extract any undecessary tags and tranlate any 
+ * other tags into valid LaTeX.
+ * @input buffer- the text thats going to be translated to LaTeX 
+ * @output string- the translated LaTeX text 
+*/
 
 string filterBuffer(string buffer){
   using namespace std::regex_constants;
@@ -109,11 +131,21 @@ string filterBuffer(string buffer){
 
 }
 
+/*
+ * Used by cURL
+*/
+
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
   ((std::string*)userp)->append((char*)contents, size * nmemb);
   return size * nmemb;
 }
+
+/**
+ * Will prompt user for a filename and URL. Initialize a LaTeX doc. and then fetch 
+ * the HTML doc. from the given URL. filterBuffer will translate the HTML into 
+ * LateX the this string is then written to the given filename.
+*/
 
 int main () {
   char fname[100];

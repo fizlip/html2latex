@@ -5,6 +5,10 @@
 using namespace std;
 using namespace std::regex_constants;
 
+/*
+ * This class contains operations that make it easier to search and replace
+ * large strings useing regular expressions
+*/
 class FilterText{
   private:
     string str;
@@ -15,6 +19,10 @@ class FilterText{
     string getResult();
 }; 
 
+/*
+ * Initialises the text to be filtered by replacing different special characters
+ * that are resereved into theri escaped format.
+*/
 void FilterText::filterThis(string str){
   regex r ("\\\\[^\\[\\]]", ECMAScript);
   regex math ("\\^", ECMAScript);
@@ -28,6 +36,12 @@ void FilterText::filterThis(string str){
   this->str = res;
 }
 
+/*
+ * Will replace the 'segment' with the 'with' string
+ * Example:
+ * assume that str = 'abc'
+ * replace('[bc]', 'a') returns str = 'aaa'
+*/
 void FilterText::replace(string segment, string with){
   regex r (segment, ECMAScript);
   string res = ""; 
@@ -35,6 +49,13 @@ void FilterText::replace(string segment, string with){
     res += c;
   str = res;
 }
+
+/*
+ * Replaces a pair of segments in a string.
+ * Exmaple:
+ * assume str = <p>abc</p>
+ * replaceFrom('<p>', '</p>', '', '') returns str = 'abc'
+*/
 
 void FilterText::replaceFrom(string startSeg, string endSeg, string startWith, string endWith){
 
@@ -46,6 +67,10 @@ void FilterText::replaceFrom(string startSeg, string endSeg, string startWith, s
   str = res;
 
 }
+
+/*
+ * returns the replaced string
+*/
 
 string FilterText::getResult(){
   return this->str;
