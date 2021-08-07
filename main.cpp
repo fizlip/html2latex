@@ -86,7 +86,6 @@ string filterBuffer(string buffer){
   FilterText f;
   f.filterThis(buffer);
 
-  //regex regular_expr ("(<h[1-6]>[^]*?</h[1-6]>|<p>[^]*?</p>)", ECMAScript);
   // remove unecessary tags
   string filter = "(</*(p|html|body|div).*?>|<!.*>|<head>[^]*?</head>|</li>|<script.*>[^]*?</script>|<math.*?>|</math>|<semantics.*?>|</semantics>|<mrow.*?>|</mrow>|<mstyle.*?>|</mstyle>|<msub.*?>|</msub>|<annotation.*?>[^]*?</annotation>|<a.*?>|</a>|<input.*?>|<img.*?/>|<footer.*?>[^]*?</footer>|<nav.*?>[^]*?</nav>|<sup.*?>[^]*?</sup>|<style.*?>[^]*?</style>|</abbr>|<table.*?>[^]*?</table>|<label.*?>[^]*?</label>)";
 
@@ -112,7 +111,7 @@ string filterBuffer(string buffer){
   string quoteBegin = "<dl><dd>";
   string quoteEnd= "</dd></dl>";
 
-  //string res = regex_replace(regex_replace(regex_replace(line, filter, ""), sectionsBegin, "\\section{"), sectionsEnd, "}"); 
+  // Extract text from html
   string res = "";
   f.replace(lineBreak, "\\\\\n");
   f.replace(filter, "");
@@ -151,15 +150,16 @@ int main () {
   char fname[100];
   char url[1000];
 
+  // Prompt user
   printf("Enter a filename: ");
   scanf("%s", fname);
   printf("Enter a URL: ");
   scanf("%s", url);
 
-  string line = "Something went wrong!";
-
+  // Init file
   emptyFile(fname);
 
+  // Start fetch
   CURL *curl;
   CURLcode res;
   string readBuffer;
@@ -172,12 +172,13 @@ int main () {
     res = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
 
-    //string line = readBuffer;
+    // Init LaTeX
     initLatexDoc(fname);
+    // Filter HTML
     string line = filterBuffer(readBuffer);
+
     writeToFile(fname, line);
     writeToFile(fname,"\\end{document}");
-    //std::cout << readBuffer << std::endl;
   }
 
   return 0;
