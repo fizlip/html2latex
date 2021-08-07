@@ -34,9 +34,9 @@ that can be easily compiled using any LaTeX compiler.
 
 ## Getting started
 Setting up the project is pretty simple. You'll need to have a working C++ compiler
-and a latex compiler to translate the .tex file into a PDF.
+and a LaTeX compiler to translate the .tex file into a PDF.
 
-### Prerequisites<
+### Prerequisites
 
 html2latex uses the C++ cURL library for fetching the HTML at any specified URL.
 This uses the OpenSSL libraries that need to be installed on your system.
